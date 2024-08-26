@@ -1,0 +1,17 @@
+import requests
+country=input("Enter the country name : ")
+url=f"https://disease.sh/v3/covid-19/countries/{country}"
+info=requests.get(url)
+if info.status_code==404:
+    print("Country not found")
+else:
+    cases=info.json()["cases"]
+    deaths=info.json()["deaths"]
+    tests=info.json()["tests"]
+    population=info.json()["population"]
+    print("COVID_19 TRACKER...")
+    print(f"Total population in {country} is {population}")
+    print(f"Total no.of tests taken in {country} is {tests}")
+    print(f"Total no.of cases in {country} is {cases}")
+    print(f"Total no.of deaths in {country} is {deaths}")
+    print(f"Total no.of recoveries in {country} is {cases-deaths}"
