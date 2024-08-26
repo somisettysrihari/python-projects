@@ -1,0 +1,19 @@
+import requests
+api_key="0b563bad1d7970f0a7d1a2d766f968f2"
+user_input=input("enter the city name:")
+weather_data=requests.get(
+   f"https://api.openweathermap.org/data/2.5/weather?q={user_input}&units=imperial&APPID={api_key}")
+if weather_data.json()["cod"]=="404":
+    print("city not found")
+else:
+    #print(weather_data.json())
+    weather=weather_data.json()["weather"][0]["main"]
+    temp=round(weather_data.json()["main"]["temp"])
+    humidity=weather_data.json()["main"]["humidity"]
+    windspeed=weather_data.json()["wind"]["speed"]
+    country=weather_data.json()["sys"]["country"]
+    print(f"the weather in {user_input} is {weather}")
+    print(f"the temperture in {user_input} is {temp}F")
+    print(f"the humidity in {user_input} is {humidity}")
+    print(f"the windspeed in {user_input} is {windspeed}kmph")
+    print(f"the {user_input} is in {country}")
